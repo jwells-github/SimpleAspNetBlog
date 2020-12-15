@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Microsoft.EntityFrameworkCore;
+using SimpleBlog.Models;
+
 namespace SimpleBlog
 {
     public class Startup
@@ -24,6 +27,10 @@ namespace SimpleBlog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<BlogDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration["ConnectionStrings:SimpleBlogConnection"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
