@@ -62,12 +62,24 @@ namespace SimpleBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                blogPost.BlogPostID = default;
                 context.BlogPosts.Update(blogPost);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Detail), new { id = blogPost.BlogPostID });
             }
             return View("BlogEditor", blogPost);
+        }
+        public async Task<IActionResult> Delete(long id)
+        {
+            BlogPost blogPost = await context.BlogPosts.FindAsync(id);
+            return View(blogPost);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(BlogPost blogPost)
+        {
+            context.BlogPosts.Remove(blogPost);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
