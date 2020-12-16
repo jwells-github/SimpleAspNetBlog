@@ -10,7 +10,8 @@
     <div class="form-group">
         <label asp-for="Content"></label>
         <input class="form-control" asp-for="Content" />
-    </div>  
-    <input type="hidden" asp-for="PostedDate" value="@Model.PostedDate"/>
-    <button class="btn" type="submit">Submit</button>
+    </div>
+    <input type="hidden" asp-for="BlogPostID" value="@Model.BlogPostID" />
+    <input type="hidden" asp-for="PostedDate" value="@Model.PostedDate" />
+    <button class="btn btn-primary" type="submit">Submit</button>
 </form>
