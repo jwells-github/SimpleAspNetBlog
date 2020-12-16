@@ -49,7 +49,25 @@ namespace SimpleBlog.Controllers
                 return RedirectToAction(nameof(Detail), new { id = blogPost.BlogPostID });
             }
             return View("BlogEditor", blogPost);
+        }
 
+        public async Task<IActionResult> Edit(long id)
+        {
+            BlogPost blogPost = await context.BlogPosts.FindAsync(id);
+            return View("BlogEditor", blogPost);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromForm] BlogPost blogPost)
+        {
+            if (ModelState.IsValid)
+            {
+                blogPost.BlogPostID = default;
+                context.BlogPosts.Update(blogPost);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Detail), new { id = blogPost.BlogPostID });
+            }
+            return View("BlogEditor", blogPost);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
