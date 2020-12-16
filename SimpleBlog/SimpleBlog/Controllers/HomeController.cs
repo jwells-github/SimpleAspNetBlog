@@ -13,19 +13,17 @@ namespace SimpleBlog.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private BlogDbContext context;
+
+        public HomeController(ILogger<HomeController> logger, BlogDbContext data)
         {
+            context = data;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return View(context.BlogPosts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
