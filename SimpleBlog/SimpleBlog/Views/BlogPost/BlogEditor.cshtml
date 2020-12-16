@@ -1,0 +1,15 @@
+﻿@model BlogPost
+@{  Layout = "_Layout";}
+
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <input class="form-control" asp-for="Content" />
+    </div>
+    <button class="btn" type="submit">Submit</button>
+</form>

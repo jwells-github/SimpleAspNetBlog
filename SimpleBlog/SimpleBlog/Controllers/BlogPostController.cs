@@ -33,6 +33,25 @@ namespace SimpleBlog.Controllers
             return View(bp);
         }
 
+        public IActionResult Create()
+        {
+            return View("BlogEditor", new BlogPost());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] BlogPost blogPost)
+        {
+            if (ModelState.IsValid)
+            {
+                blogPost.BlogPostID = default;
+                blogPost.PostedDate = DateTime.Now;
+                context.BlogPosts.Add(blogPost);
+                await context.SaveChangesAsync();
+                return RedirectToAction(nameof(Detail), new { id = blogPost.BlogPostID });
+            }
+            return View("BlogEditor", blogPost);
+
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
