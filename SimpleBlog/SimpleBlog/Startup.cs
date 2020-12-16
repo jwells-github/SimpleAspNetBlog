@@ -57,7 +57,7 @@ namespace SimpleBlog
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=BlogPost}/{action=Index}/{id?}");
             });
             SeedData.SeedDatabase(context);
         }
