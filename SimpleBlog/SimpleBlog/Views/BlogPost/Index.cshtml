@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BlogPost>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@foreach (BlogPost bp in Model)
+{
+    <div>
+        <a asp-action="Detail" asp-route-id="@bp.BlogPostID">@bp.Title</a>
+    </div>
+}
